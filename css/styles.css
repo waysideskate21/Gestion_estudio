@@ -33,3 +33,23 @@ align-items: center;
     display: inline-flex;
 }
 
+/* Cambia el color del navbar-link al hacer hover o estar activo */
+.navbar-item.has-dropdown:hover .navbar-link,
+.navbar-item.has-dropdown.is-active .navbar-link {
+    color: black !important;
+    font-weight: bold;
+}
+
+/* Color inicial para los navbar-link */
+.navbar-link {
+    color: white !important;
+}
+
+/* Ajustes para el dropdown de usuario */
+.navbar-dropdown {
+    background-color: #74c4c4;
+}
+.navbar-dropdown a.navbar-item:hover {
+    background-color: #5aa8a8;
+    color: white !important;
+}
