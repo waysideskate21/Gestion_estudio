@@ -1,12 +1,10 @@
 <head>
     <?php require "./inc/navbar.php"; ?>
+    <script src="..a"></script>
 </head>
 
 <body>
     <div class="section is-justify-content-center is-align-items-center is-flex">
-
-        <!-- Añadir al inicio del formulario -->
-        <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
 
         <!-- Mostrar mensajes de error -->
         <?php if (isset($_SESSION['mensaje'])): ?>
@@ -18,7 +16,8 @@
         <?php endif; ?>
 
         <!-- Modificar el action del formulario -->
-        <form class="box login" action="procesos/usuarios/login_procesar.php" method="POST" autocomplete="on">
+        <form class="box login" action="procesos/usuarios/login.php" method="POST" autocomplete="on">
+                    <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
             <h5 class="title is-5 has-text-centered is-uppercase">Bienvenido Usuario</h5>
             <div class="field">
                 <label class="label">Usuario</label>

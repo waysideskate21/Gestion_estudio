@@ -1,0 +1,208 @@
+body,html,head {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #f8e596;
+    justify-content: center;
+align-items: center;
+}
+
+.main-container {
+    height: 100%;
+    width: 100%;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-container>.login, .main-container>.hero-body {
+    height: 100%;
+    width: 100%;
+}
+
+.main-container>.hero-body {
+    text-align: center;
+    justify-content: center;
+    display: flex;
+
+
+}
+
+.form-inline {
+    display: inline-flex;
+}
+
+/* Cambia el color del navbar-link al hacer hover o estar activo */
+.navbar-item.has-dropdown:hover .navbar-link,
+.navbar-item.has-dropdown.is-active .navbar-link {
+    color: #74c4c4 ;
+    font-weight: bold;
+}
+
+
+
+/* Oculta los dropdowns en móvil y añade transición */
+@media screen and (min-width: 1024px) {
+  .navbar-menu .navbar-start {
+    position: relative;
+    margin-left: 1.5rem;
+    padding-left: 0.75rem; 
+  }
+
+  .navbar-menu .navbar-start::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0; 
+    transform: translateY(-50%);
+    width: 1px;
+    height: 24px;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+/* 2. Separadores entre los ítems directos de navbar-start (solo en desktop) */
+@media screen and (min-width: 1024px) {
+  .navbar-menu .navbar-start > .navbar-item {
+    position: relative;
+    /* El padding-right es para el espacio del separador, 
+       el hover no debería rellenar este espacio si no queremos. */
+    padding-right: 1.5rem; 
+  }
+
+  .navbar-menu .navbar-start > .navbar-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0; /* Ajustado para que la línea esté en el borde derecho del padding del item */
+    transform: translateY(-50%);
+    width: 1px;
+    height: 24px;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.navbar-dropdown .navbar-item::after,
+.navbar-dropdown .navbar-item::before {
+  display: none !important;
+}
+
+.navbar-menu .navbar-start > .navbar-item.has-dropdown::after {
+    display: none;
+}
+/* --- FIN DE ESTILOS PARA SEPARADORES DEL NAVBAR --- */
+
+
+/* --- INICIO DE ESTILOS PARA HOVER CONSISTENTE EN NAVBAR --- */
+
+/* Estilo base para los items de texto en el navbar (blanco sobre tu fondo #74c4c4) */
+.navbar-menu .navbar-start > a.navbar-item, /* Enlaces directos como "Inicio" */
+.navbar-menu .navbar-start > .has-dropdown > a.navbar-link, /* Enlaces de dropdowns */
+.navbar-menu .navbar-end > .has-dropdown > a.navbar-link { /* Enlaces de dropdown en navbar-end */
+    color: #ffffff; /* Color de texto blanco */
+}
+
+/* Hover y active para enlaces directos en navbar-start (como "Inicio") */
+.navbar-menu .navbar-start > a.navbar-item:hover,
+.navbar-menu .navbar-start > a.navbar-item.is-active {
+    background-color: rgba(0, 0, 0, 0.1) !important; /* Fondo ligeramente más oscuro, similar al de los dropdowns */
+    color: #ffffff !important; /* Mantener texto blanco */
+}
+
+/* Hover y active para los links de dropdowns (tanto en navbar-start como navbar-end) */
+.navbar-item.has-dropdown:hover > .navbar-link,
+.navbar-item.has-dropdown.is-active > .navbar-link {
+    background-color: rgba(0, 0, 0, 0.1) !important; /* !important para asegurar que sobreescriba estilos de Bulma si es necesario */
+    color: #ffffff !important; /* Mantener texto blanco */
+}
+
+/* Para asegurar que el texto dentro de los dropdowns (los .navbar-item) no herede el color blanco si no deben */
+.navbar-dropdown .navbar-item {
+    color: #4a4a4a; /* Color de texto por defecto de Bulma para items de dropdown */
+}
+.navbar-dropdown .navbar-item:hover {
+    background-color: #f5f5f5; /* Color de fondo de hover por defecto de Bulma */
+    color: #363636; /* Color de texto de hover por defecto de Bulma */
+}@media screen and (min-width: 1024px) {
+  .navbar-menu .navbar-start {
+    position: relative;
+    margin-left: 1.5rem;
+    padding-left: 0.75rem; 
+  }
+
+  .navbar-menu .navbar-start::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0; 
+    transform: translateY(-50%);
+    width: 1px;
+    height: 24px;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+/* 2. Separadores entre los ítems directos de navbar-start (solo en desktop) */
+@media screen and (min-width: 1024px) {
+  .navbar-menu .navbar-start > .navbar-item {
+    position: relative;
+    /* El padding-right es para el espacio del separador, 
+       el hover no debería rellenar este espacio si no queremos. */
+    padding-right: 1.5rem; 
+  }
+
+  .navbar-menu .navbar-start > .navbar-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 0; /* Ajustado para que la línea esté en el borde derecho del padding del item */
+    transform: translateY(-50%);
+    width: 1px;
+    height: 24px;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+.navbar-dropdown .navbar-item::after,
+.navbar-dropdown .navbar-item::before {
+  display: none !important;
+}
+
+.navbar-menu .navbar-start > .navbar-item.has-dropdown::after {
+    display: none;
+}
+/* --- FIN DE ESTILOS PARA SEPARADORES DEL NAVBAR --- */
+
+
+/* --- INICIO DE ESTILOS PARA HOVER CONSISTENTE EN NAVBAR --- */
+
+/* Estilo base para los items de texto en el navbar (blanco sobre tu fondo #74c4c4) */
+.navbar-menu .navbar-start > a.navbar-item, /* Enlaces directos como "Inicio" */
+.navbar-menu .navbar-start > .has-dropdown > a.navbar-link, /* Enlaces de dropdowns */
+.navbar-menu .navbar-end > .has-dropdown > a.navbar-link { /* Enlaces de dropdown en navbar-end */
+    color: #ffffff; /* Color de texto blanco */
+}
+
+/* Hover y active para enlaces directos en navbar-start (como "Inicio") */
+.navbar-menu .navbar-start > a.navbar-item:hover,
+.navbar-menu .navbar-start > a.navbar-item.is-active {
+    background-color: rgba(0, 0, 0, 0.1) !important; /* Fondo ligeramente más oscuro, similar al de los dropdowns */
+    color: #ffffff !important; /* Mantener texto blanco */
+}
+
+/* Hover y active para los links de dropdowns (tanto en navbar-start como navbar-end) */
+.navbar-item.has-dropdown:hover > .navbar-link,
+.navbar-item.has-dropdown.is-active > .navbar-link {
+    background-color: rgba(0, 0, 0, 0.1) !important; /* !important para asegurar que sobreescriba estilos de Bulma si es necesario */
+    color: #ffffff !important; /* Mantener texto blanco */
+}
+
+/* Para asegurar que el texto dentro de los dropdowns (los .navbar-item) no herede el color blanco si no deben */
+.navbar-dropdown .navbar-item {
+    color: #4a4a4a; /* Color de texto por defecto de Bulma para items de dropdown */
+}
+.navbar-dropdown .navbar-item:hover {
+    background-color: #f5f5f5; /* Color de fondo de hover por defecto de Bulma */
+    color: #363636; /* Color de texto de hover por defecto de Bulma */
+}

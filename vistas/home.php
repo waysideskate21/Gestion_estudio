@@ -1,9 +1,31 @@
+<?php
+// vistas/home.php
 
-<div class="section is-flex is-justify-content-center is-align-items-center has-text-centered is-align-items-center" style="align-items: center; flex-direction: column;">
-    <figure style="height: auto; width: 300px; display: inline-block;">
-        <img class="is-rounded" src="./img/foto_fondo.png" alt="home-image "/>
-    </figure>
-    <h1 class="title">Home</h1>
-    <h2 class="subtitle">¡Bienvenido a la plataforma de Gestion Educativa SAS!</h2>
-    <a class="button is-link" href="index.php?vistas=login.php">Inicia Sesion aqui</a>
+// Asegurarse de que el usuario esté autenticado para acceder a esta página
+verificar_auth(); // Esta función ya debería estar disponible
+
+// Usar directamente el username de la sesión para el saludo
+$nombre_para_saludo = $_SESSION['username'] ?? 'Usuario'; // Valor por defecto si no está seteado
+
+?>
+
+<div class="container is-fluid mt-6">
+    <section class="section">
+        <div class="container has-text-centered">
+            <figure class="image";>
+                <img class="is-rounded" style="height: auto; width: 300px; display: inline-block" src="./Assets/img/foto_fondo.png" alt="Logo o imagen de bienvenida" style="max-height: 100px;"/>
+            </figure>
+            
+            <h1 class="title is-3">
+                ¡Hola, <?= htmlspecialchars(ucfirst($nombre_para_saludo)); ?>!
+            </h1>
+            <h2 class="subtitle is-5">
+                Bienvenido(a) a la Gestión Educativa SAS.
+            </h2>
+            
+
+
+        </div>
+    </section>
+
 </div>
