@@ -1,5 +1,5 @@
 <?php
-// vistas/curso_crear_formulario.php
+// vistas/crear_curso.php
 
 // Verificar rol (admin o profesor pueden crear cursos)
 // main.php ya debería estar incluido por index.php a través de auth.php
@@ -27,7 +27,7 @@ unset($_SESSION['form_data_curso_crear']); // Limpiar después de usar
 <div class="container is-fluid mt-5 mb-5">
     <div class="columns is-centered">
         <div class="column is-half">
-            <form action="procesos/cursos/curso_procesar_creacion.php" method="POST" class="box login-box" id="crearCursoForm">
+            <form action="procesos/cursos/procesar_creacion.php" method="POST" class="box login-box" id="crearCursoForm">
                 <h1 class="title has-text-centered">Crear Nuevo Curso</h1>
 
                 <?php if (isset($_SESSION['mensaje_error_curso_crear'])): ?>
@@ -63,7 +63,7 @@ unset($_SESSION['form_data_curso_crear']); // Limpiar después de usar
                         </div>
                     </div>
                     <?php if (empty($asignaturas)): ?>
-                        <p class="help is-warning">No hay asignaturas registradas. Por favor, <a href="index.php?vista=asignatura_crear_formulario">cree una asignatura</a> primero.</p>
+                        <p class="help is-warning">No hay asignaturas registradas. Por favor, <a href="index.php?vista=crear_asignatura">cree una asignatura</a> primero.</p>
                     <?php endif; ?>
                 </div>
 

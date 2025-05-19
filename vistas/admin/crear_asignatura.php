@@ -1,5 +1,5 @@
 <?php
-// vistas/asignatura_crear_formulario.php
+// vistas/crear_asignatura.php
 
 // Verificar rol (solo admin puede crear asignaturas)
 verificar_rol(['admin']);
@@ -19,7 +19,7 @@ unset($_SESSION['form_data_asignatura_crear']); // Limpiar después de usar
 <div class="container is-fluid mt-5 mb-5">
     <div class="columns is-centered">
         <div class="column is-half">
-            <form action="procesos/asignaturas/asignatura_procesar_creacion.php" method="POST" class="box login-box" id="crearAsignaturaForm">
+            <form action="procesos/asignaturas/procesar_asignatura.php" method="POST" class="box login-box" id="crearAsignaturaForm">
                 <h1 class="title has-text-centered">Crear Nueva Asignatura</h1>
 
                 <?php if (isset($_SESSION['mensaje_error_asignatura_crear'])): ?>

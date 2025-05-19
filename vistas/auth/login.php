@@ -1,5 +1,4 @@
 <head>
-    <?php require "./inc/navbar.php"; ?>
     <script src="..a"></script>
 </head>
 
@@ -16,7 +15,7 @@
         <?php endif; ?>
 
         <!-- Modificar el action del formulario -->
-        <form class="box login" action="procesos/usuarios/login.php" method="POST" autocomplete="on">
+        <form class="box login" action="procesos/auth/procesar_login.php" method="POST" autocomplete="on">
                     <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? '' ?>">
             <h5 class="title is-5 has-text-centered is-uppercase">Bienvenido Usuario</h5>
             <div class="field">

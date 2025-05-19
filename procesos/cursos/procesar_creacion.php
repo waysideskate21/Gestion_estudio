@@ -1,5 +1,5 @@
 <?php
-// procesos/cursos/curso_procesar_creacion.php
+// procesos/cursos/procesar_creacion.php
 
 require_once __DIR__ . "/../../inc/session_start.php";
 require_once __DIR__ . "/../../php/main.php";
@@ -10,14 +10,14 @@ verificar_rol(['admin', 'profesor']);
 // Verificar que la solicitud sea POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     $_SESSION['mensaje_error_curso_crear'] = "Error: Solicitud no válida.";
-    header("Location: ../../index.php?vista=curso_crear_formulario");
+    header("Location: ../../index.php?vista=crear_curso");
     exit();
 }
 
 // Validación del Token CSRF
 if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
     $_SESSION['mensaje_error_curso_crear'] = "Error: Token de seguridad inválido.";
-    header("Location: ../../index.php?vista=curso_crear_formulario");
+    header("Location: ../../index.php?vista=crear_curso");
     exit();
 }
 
@@ -60,7 +60,7 @@ if (!empty($horario_descripcion) && strlen($horario_descripcion) > 500) { // Eje
 if (!empty($errores)) {
     $_SESSION['mensaje_error_curso_crear'] = implode("<br>", $errores);
     $_SESSION['form_data_curso_crear'] = $_POST; 
-    header("Location: ../../index.php?vista=curso_crear_formulario");
+    header("Location: ../../index.php?vista=crear_curso");
     exit();
 }
 
@@ -88,7 +88,7 @@ try {
     if (!empty($errores)) {
         $_SESSION['mensaje_error_curso_crear'] = implode("<br>", $errores);
         $_SESSION['form_data_curso_crear'] = $_POST; 
-        header("Location: ../../index.php?vista=curso_crear_formulario");
+        header("Location: ../../index.php?vista=crear_curso");
         exit();
     }
 
@@ -111,14 +111,14 @@ try {
     unset($_SESSION['csrf_token']); // Invalidar el token usado
 
     $_SESSION['mensaje_exito_curso_crear'] = "¡Curso creado exitosamente!";
-    header("Location: ../../index.php?vista=curso_crear_formulario"); // O redirigir a una lista de cursos
+    header("Location: ../../index.php?vista=crear_curso"); // O redirigir a una lista de cursos
     exit();
 
 } catch (PDOException $e) {
     error_log("Error en creación de curso: " . $e->getMessage() . " - Datos: " . json_encode($_POST));
     $_SESSION['mensaje_error_curso_crear'] = "Ocurrió un error al crear el curso. Por favor, inténtelo más tarde.";
     $_SESSION['form_data_curso_crear'] = $_POST;
-    header("Location: ../../index.php?vista=curso_crear_formulario");
+    header("Location: ../../index.php?vista=crear_curso");
     exit();
 } finally {
     $pdo = null;

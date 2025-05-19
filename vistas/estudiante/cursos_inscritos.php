@@ -1,5 +1,5 @@
 <?php
-// vistas/estudiante_mis_cursos.php
+// vistas/cursos_inscritos.php
 
 // Verificar rol (solo estudiante puede acceder a esta vista)
 verificar_rol(['estudiante']);
@@ -64,7 +64,7 @@ $mis_cursos_inscritos = $stmt_mis_cursos->fetchAll(PDO::FETCH_ASSOC);
                 <?php if (empty($mis_cursos_inscritos)): ?>
                     <div class="notification is-info is-light">
                         <p>Actualmente no te encuentras inscrito en ningún curso.</p>
-                        <p class="mt-2">Puedes <a href="index.php?vista=estudiante_inscribir_curso">inscribirte a cursos aquí</a>.</p>
+                        <p class="mt-2">Puedes <a href="index.php?vista=inscribir_curso">inscribirte a cursos aquí</a>.</p>
                     </div>
                 <?php else: ?>
                     <div class="table-container">
@@ -117,7 +117,7 @@ $mis_cursos_inscritos = $stmt_mis_cursos->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                 <?php endif; ?>
                  <div class="mt-5 has-text-centered">
-                    <a href="index.php?vista=estudiante_inscribir_curso" class="button is-success">
+                    <a href="index.php?vista=inscribir_curso" class="button is-success">
                         <span class="icon"><i class="fas fa-plus-circle"></i></span>
                         <span>Inscribir más Cursos</span>
                     </a>

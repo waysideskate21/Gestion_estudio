@@ -1,5 +1,5 @@
 <?php
-// vistas/estudiante_inscribir_curso.php
+// vistas/inscribir_curso.php
 
 // Verificar rol (solo estudiante puede acceder a esta vista)
 verificar_rol(['estudiante']);

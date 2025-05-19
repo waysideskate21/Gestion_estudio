@@ -69,7 +69,7 @@ verificar_rol(['admin', 'profesor', 'estudiante']); // Permite a cualquier usuar
                         <span class="icon"><i class="fas fa-home"></i></span>
                         <span>Volver al Inicio</span>
                     </a>
-                    <a href="procesos/usuarios/logout.php" class="button is-danger">
+                    <a href="procesos/auth/procesar_logout.php" class="button is-danger">
                         <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
                         <span>Cerrar Sesión</span>
                     </a>

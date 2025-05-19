@@ -1,5 +1,5 @@
 <?php
-// procesos/asignaturas/asignatura_procesar_creacion.php
+// procesos/asignaturas/procesar_asignatura.php
 
 require_once __DIR__ . "/../../inc/session_start.php";
 require_once __DIR__ . "/../../php/main.php";
@@ -10,14 +10,14 @@ verificar_rol(['admin']);
 // Verificar que la solicitud sea POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     $_SESSION['mensaje_error_asignatura_crear'] = "Error: Solicitud no válida.";
-    header("Location: ../../index.php?vista=asignatura_crear_formulario");
+    header("Location: ../../index.php?vista=crear_asignatura");
     exit();
 }
 
 // Validación del Token CSRF
 if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
     $_SESSION['mensaje_error_asignatura_crear'] = "Error: Token de seguridad inválido.";
-    header("Location: ../../index.php?vista=asignatura_crear_formulario");
+    header("Location: ../../index.php?vista=crear_asignatura");
     exit();
 }
 
@@ -61,7 +61,7 @@ if (strlen($descripcion_asignatura ?? '') > 1000) { // Límite de ejemplo para d
 if (!empty($errores)) {
     $_SESSION['mensaje_error_asignatura_crear'] = implode("<br>", $errores);
     $_SESSION['form_data_asignatura_crear'] = $_POST; 
-    header("Location: ../../index.php?vista=asignatura_crear_formulario");
+    header("Location: ../../index.php?vista=crear_asignatura");
     exit();
 }
 
@@ -75,7 +75,7 @@ try {
     if ($stmt_check_codigo->fetch()) {
         $_SESSION['mensaje_error_asignatura_crear'] = "El código de asignatura ingresado ya existe.";
         $_SESSION['form_data_asignatura_crear'] = $_POST;
-        header("Location: ../../index.php?vista=asignatura_crear_formulario");
+        header("Location: ../../index.php?vista=crear_asignatura");
         exit();
     }
 
@@ -86,7 +86,7 @@ try {
         if ($stmt_check_prog->rowCount() == 0) {
             $_SESSION['mensaje_error_asignatura_crear'] = "El programa académico seleccionado no existe.";
             $_SESSION['form_data_asignatura_crear'] = $_POST;
-            header("Location: ../../index.php?vista=asignatura_crear_formulario");
+            header("Location: ../../index.php?vista=crear_asignatura");
             exit();
         }
     }
@@ -120,14 +120,14 @@ try {
     unset($_SESSION['csrf_token']); 
 
     $_SESSION['mensaje_exito_asignatura_crear'] = "¡Asignatura creada exitosamente!";
-    header("Location: ../../index.php?vista=asignatura_crear_formulario"); // O redirigir a una lista de asignaturas
+    header("Location: ../../index.php?vista=crear_asignatura"); // O redirigir a una lista de asignaturas
     exit();
 
 } catch (PDOException $e) {
     error_log("Error en creación de asignatura: " . $e->getMessage() . " - Datos: " . json_encode($_POST));
     $_SESSION['mensaje_error_asignatura_crear'] = "Ocurrió un error al crear la asignatura. Por favor, inténtelo más tarde.";
     $_SESSION['form_data_asignatura_crear'] = $_POST;
-    header("Location: ../../index.php?vista=asignatura_crear_formulario");
+    header("Location: ../../index.php?vista=crear_asignatura");
     exit();
 } finally {
     $pdo = null;

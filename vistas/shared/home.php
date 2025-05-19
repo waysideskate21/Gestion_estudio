@@ -20,7 +20,7 @@ $nombre_para_saludo = $_SESSION['username'] ?? 'Usuario'; // Valor por defecto s
                 ¡Hola, <?= htmlspecialchars(ucfirst($nombre_para_saludo)); ?>!
             </h1>
             <h2 class="subtitle is-5">
-                Bienvenido(a) a la Gestión Educativa SAS.
+                Bienvenido(a) al sistema de Gestion Universitario SAS.
             </h2>
             
 

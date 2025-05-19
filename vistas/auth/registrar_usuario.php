@@ -5,7 +5,7 @@ unset($_SESSION['form_data_registro']);
 
 <section class="section is-justify-content-center is-align-items-center">
     <div class="container column">
-        <form action="procesos/usuarios/procesar_registro.php" method="POST" class="box login-box" id="registroForm">
+        <form action="procesos/auth/procesar_registro" method="POST" class="box login-box" id="registroForm">
             <h1 class="title has-text-centered">Regístrate</h1>
 
             <?php if (isset($_SESSION['mensaje_error_registro'])): ?>

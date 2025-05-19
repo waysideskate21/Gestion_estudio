@@ -12,14 +12,14 @@ $id_estudiante_actual = $_SESSION['id_usuario'];
 // Verificar que la solicitud sea POST
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     $_SESSION['mensaje_inscripcion'] = "Error: Solicitud no válida.";
-    header("Location: ../../index.php?vista=estudiante_inscribir_curso");
+    header("Location: ../../index.php?vista=inscribir_curso");
     exit();
 }
 
 // Validación del Token CSRF
 if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
     $_SESSION['mensaje_inscripcion'] = "Error: Token de seguridad inválido.";
-    header("Location: ../../index.php?vista=estudiante_inscribir_curso");
+    header("Location: ../../index.php?vista=inscribir_curso");
     exit();
 }
 
@@ -29,7 +29,7 @@ $id_curso_a_inscribir = limpiar_cadena($_POST['id_curso_a_inscribir'] ?? '');
 // Validaciones del Lado del Servidor
 if (empty($id_curso_a_inscribir) || !validar_entero($id_curso_a_inscribir)) {
     $_SESSION['mensaje_inscripcion'] = "Error: El curso seleccionado no es válido.";
-    header("Location: ../../index.php?vista=estudiante_inscribir_curso");
+    header("Location: ../../index.php?vista=inscribir_curso");
     exit();
 }
 
@@ -50,7 +50,7 @@ try {
     if (!$curso_info) {
         $pdo->rollBack();
         $_SESSION['mensaje_inscripcion'] = "Error: El curso seleccionado no existe.";
-        header("Location: ../../index.php?vista=estudiante_inscribir_curso");
+        header("Location: ../../index.php?vista=inscribir_curso");
         exit();
     }
 
@@ -63,7 +63,7 @@ try {
     if ($stmt_check_inscripcion->fetch()) {
         $pdo->rollBack();
         $_SESSION['mensaje_inscripcion'] = "Error: Ya se encuentra inscrito en este curso.";
-        header("Location: ../../index.php?vista=estudiante_inscribir_curso");
+        header("Location: ../../index.php?vista=inscribir_curso");
         exit();
     }
 
@@ -76,7 +76,7 @@ try {
     if ($inscritos >= $curso_info['cupo_maximo']) {
         $pdo->rollBack();
         $_SESSION['mensaje_inscripcion'] = "Error: No hay cupos disponibles para este curso.";
-        header("Location: ../../index.php?vista=estudiante_inscribir_curso");
+        header("Location: ../../index.php?vista=inscribir_curso");
         exit();
     }
     
@@ -98,7 +98,7 @@ try {
     // Notificación (simple por ahora, podrías expandir esto)
     // $nombre_curso_inscrito = ... (obtener nombre del curso para el mensaje)
     $_SESSION['mensaje_inscripcion'] = "¡Inscripción exitosa en el curso!";
-    header("Location: ../../index.php?vista=estudiante_inscribir_curso"); // O a "mis cursos inscritos"
+    header("Location: ../../index.php?vista=inscribir_curso"); // O a "mis cursos inscritos"
     exit();
 
 } catch (PDOException $e) {
@@ -107,7 +107,7 @@ try {
     }
     error_log("Error en inscripción de estudiante: " . $e->getMessage() . " - Estudiante ID: " . $id_estudiante_actual . ", Curso ID: " . $id_curso_a_inscribir);
     $_SESSION['mensaje_inscripcion'] = "Ocurrió un error durante el proceso de inscripción. Por favor, inténtelo más tarde.";
-    header("Location: ../../index.php?vista=estudiante_inscribir_curso");
+    header("Location: ../../index.php?vista=inscribir_curso");
     exit();
 } finally {
     $pdo = null;

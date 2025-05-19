@@ -1,5 +1,5 @@
 <?php
-// procesos/usuarios/procesar_registro.php
+// procesos/usuarios/procesar_registro
 
 require_once __DIR__ . "/../../inc/session_start.php";
 require_once __DIR__ . "/../../php/main.php";
