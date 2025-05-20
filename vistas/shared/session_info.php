@@ -65,7 +65,7 @@ verificar_rol(['admin', 'profesor', 'estudiante']); // Permite a cualquier usuar
                 </div>
 
                 <div class="buttons is-centered mt-5">
-                    <a href="index.php?vista=home" class="button is-link">
+                    <a href="index.php?vista=shared/home" class="button is-link">
                         <span class="icon"><i class="fas fa-home"></i></span>
                         <span>Volver al Inicio</span>
                     </a>

@@ -28,9 +28,8 @@ $tipo_usuario_actual = $_SESSION['tipo_usuario'] ?? null;
               Administración
             </a>
             <div class="navbar-dropdown is-boxed">
-              <a class="navbar-item" href="index.php?vista=admin/lista_usuarios">Gestionar Usuarios</a>
-              <a class="navbar-item" href="index.php?vista=admin/cursos_lista">Gestionar Cursos (Admin)</a> 
-              <a class="navbar-item" href="index.php?vista=cursos/formulario_curso">Crear/Editar Curso</a>
+              <a class="navbar-item" href="index.php?vista=admin/gestion_usuarios">Gestionar Usuarios</a>
+              <a class="navbar-item" href="index.php?vista=admin/cursos_lista">Gestionar Cursos</a> 
               <a class="navbar-item" href="index.php?vista=admin/crear_asignatura">Crear Nueva Asignatura</a>
               <a class="navbar-item" href="index.php?vista=admin/lista_programas">Gestionar Programas</a>
               <hr class="navbar-divider">
@@ -44,7 +43,6 @@ $tipo_usuario_actual = $_SESSION['tipo_usuario'] ?? null;
             </a>
             <div class="navbar-dropdown is-boxed">
               <a class="navbar-item" href="index.php?vista=profesor/lista_cursos">Ver Mis Cursos</a>
-              <a class="navbar-item" href="index.php?vista=cursos/formulario_curso">Crear/Editar Curso</a>
               <a class="navbar-item" href="index.php?vista=profesor/gestion_notas">Gestionar Calificaciones</a>
               <a class="navbar-item" href="index.php?vista=profesor/gestion_asistencias">Registrar Asistencia</a>
             </div>

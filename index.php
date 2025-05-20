@@ -60,7 +60,7 @@ if (!isset($solicitud_vista_actual)) { // $solicitud_vista_actual es definida en
             'shared/session_info',
             // Admin
             'admin/panel_admin',
-            'admin/lista_usuarios',
+            'admin/gestion_usuarios',
             'admin/crear_asignatura',
             'admin/lista_asignaturas',
             'admin/crear_programa',
@@ -68,6 +68,7 @@ if (!isset($solicitud_vista_actual)) { // $solicitud_vista_actual es definida en
             'admin/cursos_lista', 
             'admin/configuracion_sistema',
             'admin/crear_usuario',
+            'admin/editar_usuario',
             // Profesor
             'profesor/panel_profesor',
             'profesor/lista_cursos',    
@@ -79,9 +80,8 @@ if (!isset($solicitud_vista_actual)) { // $solicitud_vista_actual es definida en
             'estudiante/cursos_inscritos',
             'estudiante/calificaciones_estudiante',
             // Módulo de Cursos (Formularios y vistas comunes)
-            'cursos/formulario_curso', // <--- RUTA ACTUALIZADA AQUÍ
-            // 'cursos/detalle_curso', 
-
+            'cursos/formulario_curso', 
+            'cursos/detalles_curso', 
             // Raíz de vistas
             '404', 
         ];

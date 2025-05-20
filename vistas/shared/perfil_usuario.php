@@ -285,7 +285,7 @@ if ($tabla_rol && $datos_usuario) {
                             <span class="icon"><i class="fas fa-edit"></i></span>
                             <span>Editar Perfil</span>
                         </a>
-                        <a href="index.php?vista=home" class="button is-link">
+                        <a href="index.php?vista=shared/home" class="button is-link">
                             <span class="icon"><i class="fas fa-arrow-left"></i></span>
                             <span>Volver</span>
                         </a>
