@@ -1,52 +1,35 @@
 <?php
 // index.php (Controlador Frontal Principal - Reestructurado)
 
-// 1. Iniciar la sesión (debe ser lo primero para que $_SESSION esté disponible)
-require "./inc/session_start.php";
+require "./inc/session_start.php"; 
+require "./inc/auth.php"; 
 
-// 2. Manejar autenticación, seguridad de sesión y cargar funciones principales
-// auth.php ya incluye main.php
-require "./inc/auth.php";
+if (!isset($solicitud_vista_actual)) { // $solicitud_vista_actual es definida en auth.php
+    $solicitud_vista_actual = $_GET['vista'] ?? '';
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <?php
-    // 3. Incluir la cabecera HTML (metatags, CSS, título)
-    include "./inc/head.php";
-    ?>
+    <?php include "./inc/head.php"; ?>
 </head>
 <body>
     <?php
-    // 4. Determinar la vista actual para decidir si mostrar el navbar
-    // $current_vista_path se define en auth.php (ej: 'auth/login'), o aquí como fallback.
-    if (!isset($current_vista_path)) { // $current_vista_path es la variable que usa auth.php
-        $current_vista_path = $_GET['vista'] ?? '';
-    }
-
     $mostrar_navbar = false;
-    // Vistas públicas que NO muestran el navbar principal cuando el usuario no está logueado
     $paginas_publicas_sin_navbar = ['auth/login'];
 
     if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-        // Si está logueado, mostrar navbar, excepto si está intentando acceder a login/registro
-        // (aunque auth.php debería redirigir en esos casos)
-        if ($current_vista_path !== 'auth/login' && $current_vista_path !== 'auth/registrar_usuario') {
+        if ($solicitud_vista_actual !== 'auth/login' && $solicitud_vista_actual !== 'auth/registrar_usuario') {
             $mostrar_navbar = true;
         }
     } else {
-        // Si NO está logueado, mostrar navbar EXCEPTO en las páginas definidas en $paginas_publicas_sin_navbar
-        if (!in_array($current_vista_path, $paginas_publicas_sin_navbar)) {
+        if (!in_array($solicitud_vista_actual, $paginas_publicas_sin_navbar)) {
             $mostrar_navbar = true;
         }
     }
-    
-    // Caso especial para la URL raíz (sin ?vista=...)
-    if (empty($current_vista_path) && !(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true)) {
-        // Si es la raíz Y no está logueado, va a 'auth/login', no mostrar navbar.
+    if (empty($solicitud_vista_actual) && !(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true)) {
         $mostrar_navbar = false;
-    } elseif (empty($current_vista_path) && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-        // Si es la raíz Y está logueado, va a 'shared/home', sí mostrar navbar.
+    } elseif (empty($solicitud_vista_actual) && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
         $mostrar_navbar = true;
     }
 
@@ -55,77 +38,73 @@ require "./inc/auth.php";
     }
     ?>
 
-    <div class="main-container pt-5 pb-5">
+    <div class="main-container">
         <?php
-        // 5. Lógica de Enrutamiento de Vistas con Lista Blanca
-
-        // Definir la vista a cargar por defecto según el estado de sesión
         if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
-            $vista_a_cargar = $_GET['vista'] ?? 'auth/login'; // Default a login si no está logueado
-            // Asegurar que solo pueda acceder a login o registro
-            if ($vista_a_cargar !== 'auth/registrar_usuario' && $vista_a_cargar !== 'auth/login') {
-                $vista_a_cargar = 'auth/login';
+            $vista_a_incluir = $_GET['vista'] ?? 'auth/login';
+            if ($vista_a_incluir !== 'auth/registrar_usuario' && $vista_a_incluir !== 'auth/login') {
+                $vista_a_incluir = 'auth/login';
             }
         } else {
-            $vista_a_cargar = $_GET['vista'] ?? 'shared/home'; // Default a home si está logueado
+            $vista_a_incluir = $_GET['vista'] ?? 'shared/home';
         }
 
-        // LISTA BLANCA de vistas permitidas (¡DEBES ACTUALIZAR ESTO CON TUS RUTAS EXACTAS!)
+        // LISTA BLANCA de vistas permitidas (ACTUALIZADA SEGÚN TU ESTRUCTURA)
         $vistas_permitidas = [
             // Auth
             'auth/login',
             'auth/registrar_usuario',
-            // Shared (comunes a usuarios logueados)
+            // Shared
             'shared/home',
             'shared/perfil_usuario',
             'shared/session_info',
             // Admin
             'admin/panel_admin',
-            'admin/usuarios_lista',
-            'admin/crear_asignatura', // Asumo que es el formulario (antes asignatura_crear_formulario)
+            'admin/lista_usuarios',
+            'admin/crear_asignatura',
             'admin/lista_asignaturas',
-            'admin/crear_programa',   // Asumo que es el formulario
+            'admin/crear_programa',
             'admin/lista_programas',
-            'admin/lista_curso',      // Asumo que es cursos_lista_admin
+            'admin/cursos_lista', 
             'admin/configuracion_sistema',
-            'admin/crear_usuario',    // Formulario para admin crear usuarios
-            // 'admin/curso_formulario_admin', // Si tienes uno específico para admin editar cursos
-
+            'admin/crear_usuario',
             // Profesor
             'profesor/panel_profesor',
-            'profesor/lista_cursos',     // Asumo que es para ver sus cursos (antes profesor_ver_cursos)
-            'profesor/crear_curso',      // Asumo que es el formulario (antes curso_crear_formulario)
-            // 'profesor/gestion_notas',
-            // 'profesor/gestion_asistencias',
-
+            'profesor/lista_cursos',    
+            'profesor/gestion_notas',
+            'profesor/gestion_asistencias',
             // Estudiante
             'estudiante/panel_estudiante',
-            'estudiante/inscripcion_cursos', // Asumo que es para ver disponibles e inscribirse
+            'estudiante/inscripcion_cursos',
             'estudiante/cursos_inscritos',
-            // 'estudiante/calificaciones_estudiante',
+            'estudiante/calificaciones_estudiante',
+            // Módulo de Cursos (Formularios y vistas comunes)
+            'cursos/formulario_curso', // <--- RUTA ACTUALIZADA AQUÍ
+            // 'cursos/detalle_curso', 
 
-            // Raíz de vistas (si alguno quedó ahí y es intencional)
-            '404', // Asumiendo vistas/404.php
+            // Raíz de vistas
+            '404', 
         ];
 
-        // Construir la ruta completa al archivo de la vista
-        $ruta_archivo_vista = "./vistas/" . $vista_a_cargar . ".php";
+        $ruta_archivo_vista = "./vistas/" . $vista_a_incluir . ".php";
 
-        if (in_array($vista_a_cargar, $vistas_permitidas) && is_file($ruta_archivo_vista)) {
+        if (in_array($vista_a_incluir, $vistas_permitidas) && is_file($ruta_archivo_vista)) {
             include $ruta_archivo_vista;
         } else {
-            // Si la vista es vacía (URL raíz) y el usuario no está logueado, ya se redirigió a 'auth/login'
-            // Si la vista es vacía y el usuario está logueado, ya se redirigió a 'shared/home'
-            // Este 'else' se alcanza si $vista_a_cargar tiene un valor pero no es válido/no existe en la lista blanca.
-            include "./vistas/404.php";
+            if (empty($vista_a_incluir) && isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+                 include "./vistas/shared/home.php"; 
+            } elseif (empty($vista_a_incluir)) {
+                 include "./vistas/auth/login.php"; 
+            } else {
+                 include "./vistas/404.php"; 
+            }
         }
         ?>
     </div>
 
     <?php
-    // 6. Incluir scripts JS globales al final del body
     include "./inc/script.php"; 
-    echo '<script src="./js/ajax.js"></script>'; // Asegúrate que esta línea esté activa y la ruta sea correcta
+    echo '<script src="./js/ajax.js"></script>';
     ?>
 </body>
 </html>

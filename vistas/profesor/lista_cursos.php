@@ -54,7 +54,6 @@ $cursos_profesor = $stmt_cursos->fetchAll(PDO::FETCH_ASSOC);
                 <?php if (empty($cursos_profesor)): ?>
                     <div class="notification is-info is-light">
                         <p>Actualmente no tiene cursos asignados.</p>
-                        <p class="mt-2">Puede <a href="index.php?vista=crear_curso">crear un nuevo curso aquí</a>.</p>
                     </div>
                 <?php else: ?>
                     <div class="table-container">
@@ -104,7 +103,7 @@ $cursos_profesor = $stmt_cursos->fetchAll(PDO::FETCH_ASSOC);
                     </div>
                 <?php endif; ?>
                  <div class="mt-5 has-text-centered">
-                    <a href="index.php?vista=crear_curso" class="button is-link">
+                    <a href="index.php?vista=cursos/formulario_curso" class="button is-link">
                         <span class="icon"><i class="fas fa-plus"></i></span>
                         <span>Crear Nuevo Curso</span>
                     </a>

@@ -1,4 +1,5 @@
 <head>
+    <?php require "./inc/navbar.php"; ?>
     <script src="..a"></script>
 </head>
 

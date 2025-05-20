@@ -98,7 +98,7 @@ try {
             // echo "DEBUG: Sesión establecida. Redirigiendo a home...<br>"; // DEBUG LINE
             // echo "<pre>DEBUG: Contenido de SESSION: " . htmlspecialchars(print_r($_SESSION, true)) . "</pre>"; // DEBUG LINE
 
-            header("Location: ../../index.php?vista=home");
+            header("Location: ../../index.php?vista=shared/home");
             exit();
 
         } else {

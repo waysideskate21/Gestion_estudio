@@ -5,7 +5,7 @@ unset($_SESSION['form_data_registro']);
 
 <section class="section is-justify-content-center is-align-items-center">
     <div class="container column">
-        <form action="procesos/auth/procesar_registro" method="POST" class="box login-box" id="registroForm">
+        <form action="procesos/auth/procesar_registro.php" method="POST" class="box login-box" id="registroForm">
             <h1 class="title has-text-centered">Regístrate</h1>
 
             <?php if (isset($_SESSION['mensaje_error_registro'])): ?>
@@ -25,7 +25,7 @@ unset($_SESSION['form_data_registro']);
                         <label class="label" for="usuario">Nombre de Usuario <span class="has-text-danger">*</span></label>
                         <div class="control has-icons-left">
                             <input class="input" type="text" name="usuario" id="usuario" placeholder="Ingresa tu nombre de usuario" 
-                                   value="<?= htmlspecialchars($form_data['usuario'] ?? ''); ?>" required pattern="^[a-zA-Z0-9_]{4,20}$" 
+                                   value="<?= htmlspecialchars($form_data['usuario'] ?? ''); ?>" required pattern="^[a-zA-Z0-9_]{4,25}$" 
                                    title="Entre 4 y 20 caracteres (letras, números y guion bajo).">
                             <span class="icon is-small is-left"><i class="fas fa-user-tag"></i></span>
                         </div>

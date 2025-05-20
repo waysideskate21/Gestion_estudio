@@ -1,8 +1,7 @@
 <?php
-// vistas/crear_curso.php
+// vistas/cursos/formulario_curso.php
 
 // Verificar rol (admin o profesor pueden crear cursos)
-// main.php ya debería estar incluido por index.php a través de auth.php
 verificar_rol(['admin', 'profesor']);
 
 // Conexión a la BD para obtener asignaturas y profesores
@@ -27,7 +26,7 @@ unset($_SESSION['form_data_curso_crear']); // Limpiar después de usar
 <div class="container is-fluid mt-5 mb-5">
     <div class="columns is-centered">
         <div class="column is-half">
-            <form action="procesos/cursos/procesar_creacion.php" method="POST" class="box login-box" id="crearCursoForm">
+            <form action="procesos/cursos/procesar_curso.php" method="POST" class="box login-box" id="crearCursoForm">
                 <h1 class="title has-text-centered">Crear Nuevo Curso</h1>
 
                 <?php if (isset($_SESSION['mensaje_error_curso_crear'])): ?>
@@ -63,7 +62,7 @@ unset($_SESSION['form_data_curso_crear']); // Limpiar después de usar
                         </div>
                     </div>
                     <?php if (empty($asignaturas)): ?>
-                        <p class="help is-warning">No hay asignaturas registradas. Por favor, <a href="index.php?vista=crear_asignatura">cree una asignatura</a> primero.</p>
+                        <p class="help is-warning">No hay asignaturas registradas. Por favor, <a href="index.php?vista=admin/crear_asignatura">cree una asignatura</a> primero.</p>
                     <?php endif; ?>
                 </div>
 
@@ -83,7 +82,7 @@ unset($_SESSION['form_data_curso_crear']); // Limpiar después de usar
                             </div>
                         </div>
                          <?php if (empty($profesores)): ?>
-                            <p class="help is-warning">No hay profesores registrados. Un administrador debe <a href="index.php?vista=registrar_usuario">registrar un profesor</a>.</p>
+                            <p class="help is-warning">No hay profesores registrados. Un administrador debe <a href="index.php?vista=auth/registrar_usuario">registrar un profesor</a> (o usar una vista de creación de usuarios específica para admin).</p>
                         <?php endif; ?>
                     </div>
                 <?php else: // Si es un profesor, se autoasigna ?>
@@ -132,7 +131,6 @@ unset($_SESSION['form_data_curso_crear']); // Limpiar después de usar
                     </div>
                      <p class="help">Este es un resumen. Los horarios por día/hora se gestionarán en otra sección.</p>
                 </div>
-
 
                 <div class="field mt-5">
                     <div class="control">
